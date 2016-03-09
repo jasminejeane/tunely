@@ -62,7 +62,7 @@ var db = require("./models");
 
 
  //render login page
-app.get('/login', function(req, res){
+app.get('/', function(req, res){
   res.render('layout.hbs', {user: req.user});
 });
 
@@ -73,7 +73,7 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'} ))
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', {
-    successRedirect: '/',
+    successRedirect: '/index',
     failureRedirect: '/'
   })
 );
@@ -83,12 +83,24 @@ app.get('/auth/facebook/callback',
 
 app.get("/logout", function(req, res){
   req.logout();
-  res.redirect("/login");
+  res.redirect("/");
 });
 
+
+//commented out to test code above to have 
+//root path be login page
 //render album index page
-app.get('/', function homepage (req, res) {
-  res.render('index');
+// app.get('/', function homepage (req, res) {
+
+  
+//    res.render('index');
+// });
+
+
+//testing login redirect to render album index page
+app.get('/index', function homepage (req, res) {
+
+ res.render('index');
 });
 
 //render genre page
